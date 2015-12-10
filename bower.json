@@ -1,0 +1,21 @@
+{
+  "name": "components",
+  "authors": [
+    "Vandeuren Glenn <vandeurenglenn@gmail.com>"
+  ],
+  "description": "My components",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "https://vandeurenglenn.github.io",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/Polymer#~1.2.3"
+  }
+}
