@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/Polymer#~1.2.3"
+    "polymer": "Polymer/Polymer#~1.2.3",
+    "paper-expandable-search": "~0.1.0-rc.2"
   }
 }
