@@ -1,0 +1,45 @@
+{
+  "name": "paper-expandable-search",
+  "version": "0.1.0-rc.2",
+  "authors": [
+    "Glenn Vandeuren <VandeurenGlenn@gmail.com>"
+  ],
+  "description": "An search bar a la material design.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "seed"
+  ],
+  "main": "paper-expandable-search.html",
+  "license": "http://vandeurenglenn.github.io/LICENSE.txt",
+  "homepage": "https://github.com/vandeurenglenn/paper-expandable-search/",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "paper-icon-button": "PolymerElements/paper-icon-button#~1.0.5",
+    "iron-iconset-svg": "PolymerElements/iron-iconset-svg#~1.0.9",
+    "iron-input": "PolymerElements/iron-input#~1.0.7",
+    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#~1.0.4",
+    "iron-localstorage": "PolymerElements/iron-localstorage#~1.0.5",
+    "iron-dropdown": "PolymerElements/iron-dropdown#~1.0.6",
+    "paper-menu": "PolymerElements/paper-menu#~1.2.0",
+    "paper-item": "PolymerElements/paper-item#~1.1.2"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  },
+  "_release": "0.1.0-rc.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.0-rc.2",
+    "commit": "a823ef55c60a8a063d301212179c01b2eafd3e0d"
+  },
+  "_source": "git://github.com/VandeurenGlenn/paper-expandable-search.git",
+  "_target": "~0.1.0-rc.2",
+  "_originalSource": "paper-expandable-search"
+}

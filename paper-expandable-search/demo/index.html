@@ -1,0 +1,68 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 Glenn Vandeuren. All rights reserved.
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>paper-search Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../paper-expandable-search.html">
+    <link rel="import" href="../paper-search-icons.html">
+    <link rel="import" href="../paper-search-bar.html">
+  </head>
+  <style media="screen">
+    .header {
+      width: 100%;
+      height: 192px;
+      background: #888;
+    }
+    .toolbar {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+    .toolbar .flex {
+      width: 100%;
+    }
+  </style>
+  <style is="custom-style">
+
+    #bigSearch {
+      --paper-search-opened-width: 100%;
+    }
+    :root {
+      --paper-search-opened-background: #eee;
+    }
+  </style>
+  <body unresolved>
+
+    <p>An example of <code>&lt;paper-search&gt;</code>:</p>
+
+    <paper-expandable-search id="bigSearch">
+      <paper-icon-button icon="ps-icons:search" open-paper-search></paper-icon-button>
+    </paper-expandable-search>
+
+    <div class="header">
+      <div class="toolbar">
+        <span class="flex"></span>
+        <paper-expandable-search>
+          <paper-icon-button icon="ps-icons:search" open-paper-search></paper-icon-button>
+        </paper-expandable-search>
+      </div>
+    </div>
+
+    <paper-expandable-search custom-close>
+      <paper-icon-button icon="ps-icons:search" open-paper-search></paper-icon-button>
+      <paper-icon-button icon="ps-icons:close" close-paper-search></paper-icon-button>
+    </paper-expandable-search>
+
+    <script>
+      var seedElement = document.querySelector('paper-search');
+
+    </script>
+
+  </body>
+</html>
