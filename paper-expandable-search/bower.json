@@ -1,10 +1,10 @@
 {
   "name": "paper-expandable-search",
-  "version": "0.1.0-rc.2",
+  "version": "0.1.1",
   "authors": [
     "Glenn Vandeuren <VandeurenGlenn@gmail.com>"
   ],
-  "description": "An search bar a la material design.",
+  "description": "An expandable search bar a la material design.",
   "keywords": [
     "web-component",
     "web-components",
@@ -27,7 +27,8 @@
     "iron-localstorage": "PolymerElements/iron-localstorage#~1.0.5",
     "iron-dropdown": "PolymerElements/iron-dropdown#~1.0.6",
     "paper-menu": "PolymerElements/paper-menu#~1.2.0",
-    "paper-item": "PolymerElements/paper-item#~1.1.2"
+    "paper-item": "PolymerElements/paper-item#~1.1.2",
+    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#~1.0.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

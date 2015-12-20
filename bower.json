@@ -17,9 +17,9 @@
   ],
   "dependencies": {
     "polymer": "Polymer/Polymer#~1.2.3",
-    "paper-expandable-search": "~0.1.0-rc.2"
+    "paper-expandable-search": "~0.1.1"
   },
-  "devDependencies": {    
+  "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~1.1.2"
   }
 }

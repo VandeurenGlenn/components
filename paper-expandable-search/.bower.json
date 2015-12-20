@@ -1,10 +1,10 @@
 {
   "name": "paper-expandable-search",
-  "version": "0.1.0-rc.2",
+  "version": "0.1.1",
   "authors": [
     "Glenn Vandeuren <VandeurenGlenn@gmail.com>"
   ],
-  "description": "An search bar a la material design.",
+  "description": "An expandable search bar a la material design.",
   "keywords": [
     "web-component",
     "web-components",
@@ -27,17 +27,18 @@
     "iron-localstorage": "PolymerElements/iron-localstorage#~1.0.5",
     "iron-dropdown": "PolymerElements/iron-dropdown#~1.0.6",
     "paper-menu": "PolymerElements/paper-menu#~1.2.0",
-    "paper-item": "PolymerElements/paper-item#~1.1.2"
+    "paper-item": "PolymerElements/paper-item#~1.1.2",
+    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#~1.0.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "web-component-tester": "*"
   },
-  "_release": "0.1.0-rc.2",
+  "_release": "0.1.1",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.0-rc.2",
-    "commit": "a823ef55c60a8a063d301212179c01b2eafd3e0d"
+    "tag": "0.1.1",
+    "commit": "a83e8f248c59951e99e57a23df2f07b83f648ac8"
   },
   "_source": "git://github.com/VandeurenGlenn/paper-expandable-search.git",
   "_target": "~0.1.0-rc.2",

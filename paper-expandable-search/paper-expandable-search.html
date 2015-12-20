@@ -28,13 +28,13 @@ Example:
         box-sizing: border-box;
         display: inline-block;
         width: var(--paper-search-width);
+        height: 40px;
         background: var(--paper-search-background);
         /*@apply(--layout-horizontal);
         @apply(--layout-center);*/
         @apply(--paper-search);
       }
       .content-wrapper {
-        padding: 16px;
         box-sizing: border-box;
         width: var(--paper-search-width);
         @apply(--layout-horizontal);
@@ -43,7 +43,7 @@ Example:
       :host(.opened) {
         background: var(--paper-search-opened-background);
         width: var(--paper-search-opened-width);
-
+        height: auto;
       }
       :host(.opened) .content-wrapper {
         width: var(--paper-search-opened-width);
@@ -89,10 +89,6 @@ Example:
       #dropShadow {
         height: 3px;
         box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
-        /*position: absolute;*/
-        /*top: 0;
-        left: 0;
-        right: 0;*/
         height: 3px;
         pointer-events: none;
         -webkit-transition: opacity 0.5s;
@@ -124,7 +120,14 @@ Example:
     </div>
     <div id="dropShadow"></div>
 
-    <paper-search-list history="{{history}}" search-value="[[value]]" autocomplete$="[[autocomplete]]" on-iron-select="_onListItemSelected" autocomplete-fallback></paper-search-list>
+    <paper-search-list history="{{history}}"
+      search-value="[[value]]"
+      fallback-set="[[fallbackSet]]"
+      autocomplete$="[[autocomplete]]"
+      vertical-align="[[verticalAlign]]"
+      on-list-item-select="_onListItemSelected"
+      autocomplete-fallback>
+    </paper-search-list>
 
     <iron-a11y-keys id="a11y" target="[[target]]" keys="enter" on-keys-pressed="onEnter"></iron-a11y-keys>
     <iframe id="remember" name="remember" hidden src="about:blank"></iframe>
@@ -150,6 +153,12 @@ Example:
        value: {
          type: String,
          notify: true
+       },
+
+       /** The positon for the menu to show */
+       verticalAlign: {
+         type: String,
+         value: 'bottom'
        },
 
        /**
@@ -201,6 +210,22 @@ Example:
 
        history: {
          type: Array
+       },
+
+       /**
+        * A set containing items for using with autocompleteFallback
+        */
+       fallbackSet: {
+         type: Array,
+         value: function() {
+           return [];
+         }
+       },
+
+       opened: {
+         type: Boolean,
+         notify: true,
+         value: false
        }
      },
 
@@ -209,6 +234,16 @@ Example:
     },
 
     attached: function() {
+      if(!Array.prototype.contains) {
+        Array.prototype.contains = function(k) {
+          for(var i=0; i < this.length; i++){
+            if(this[i] === k){
+              return true;
+            }
+          }
+          return false;
+        }
+      }
       this._searchList = Polymer.dom(this.root).querySelector('paper-search-list');
       this._searchBar = Polymer.dom(this.root).querySelector('paper-search-bar');
       var distributedNodes = Polymer.dom(this.$.openBtn).getDistributedNodes();
@@ -220,7 +255,6 @@ Example:
     },
 
     _updateHistory: function(e) {
-      console.log(e);
       this.history = e.detail.history;
       this.autocomplete = e.detail.autocomplete;
     },
@@ -236,12 +270,9 @@ Example:
       }
     },
 
-    _onListItemSelected: function(e) {
-      this.value = e.detail.item.name;
-    },
-
     open: function() {
       this.classList.add('opened');
+      this.opened = true;
       this._searchList.open();
       if (this._openBtn) {
         this._openBtn.setAttribute('disabled', '');
@@ -250,6 +281,7 @@ Example:
 
     close: function() {
       this.classList.remove('opened');
+      this.opened = false;
       this._searchList.close();
       if (this._openBtn) {
         this._openBtn.removeAttribute('disabled', '');
@@ -257,16 +289,27 @@ Example:
     },
 
     cancel: function() {
-      if (this._searchBar.value) {
-        this._searchBar.value = null;
+      if (this.value) {
+        this.value = null;
+        // this._searchBar.value = null;
       } else {
         this.close();
       }
     },
 
+    _onListItemSelected: function(e) {
+      this.value = e.detail;
+      this.fire('searched', this.value);
+      this.cancel();
+      this.close();
+    },
+
     onEnter: function() {
       this.querySelector('button').click();
       this.addToHistory(this.value);
+      this.fire('searched', this.value);
+      this.cancel();
+      this.close();
     },
 
     addToHistory:function(value) {
@@ -287,14 +330,15 @@ Example:
         }
         this.checkType(prop, Array).then(function(isArray) {
           if (isArray) {
-            [prop].forEach(function(value) {
-              if (value === val) {
+            this._propHasData(prop).then(function(hasData) {
+              if (hasData && prop.contains(val)) {
                 resolve(true);
+              } else {
+                resolve(false);
               }
-            }.bind(this));
-            resolve(false);
+            });
           }
-        });
+        }.bind(this));
       }.bind(this));
 
     },
@@ -308,14 +352,20 @@ Example:
           reject('no type defined');
         }
         if (prop.constructor === type) {
-          resolve(true);
+          return resolve(true);
         }
         resolve(false);
-      }.bind(this));
+      });
+    },
 
+    _propHasData: function(prop) {
+      return new Promise(function(resolve, reject) {
+        if (prop.length) {
+          return resolve(true);
+        }
+        resolve(false);
+      });
     }
-
-
   });
 
 </script>
