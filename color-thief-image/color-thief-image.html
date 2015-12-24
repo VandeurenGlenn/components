@@ -1,0 +1,86 @@
+<!--
+@license
+Copyright (c) 2015 Glenn Vandeuren. All rights reserved.
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../color-thief-behavior/color-thief-behavior.html">
+
+<!--
+An element providing an image & it's dominant-color.
+
+Example:
+
+    <color-thief-image></color-thief-image>
+
+@group image Elements
+@element color-thief-image
+@demo demo/index.html
+@hero hero.svg
+-->
+<dom-module id="color-thief-image">
+  <template>
+    <style>
+      :host {
+        display: flex;
+        box-sizing: border-box;
+      }
+      img {
+        display: flex;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'color-thief-image',
+      behaviors: [ColorThiefBehavior],
+
+      properties: {
+        src: {
+          type: String,
+          observer: '_setImage'
+        },
+
+        borderWidth: {
+          type: Number,
+          value: 3
+        },
+
+        noBorder: {
+          type: Boolean,
+          value: false
+        }
+      },
+
+      observers: [
+        '_setBorder(borderWidth, dominantColor, noBorder)'
+      ],
+
+      _imgLoaded: function(e) {
+        this.getColor(e.target);
+      },
+
+      /**
+       * Called when image is defined
+       *
+       * @param {object} colorThief the [ColorThief](https://github.com/lokesh/color-thief).
+       * @param {string} image the image `src` to be loaded.
+       */
+      _setImage: function(src) {
+        this.img = document.createElement('img');
+        this.img.crossOrigin = "Anonymous";
+        Polymer.dom(this.root).appendChild(this.img);
+        this.img.onload = this._imgLoaded.bind(this);
+        this.img.src = src;
+      },
+
+      _setBorder: function(width, color, no) {
+        if (!no) {
+          this.img.style.border = width + 'px solid rgb(' + color.concat() + ')';
+        }
+      }
+    });
+  </script>
+</dom-module>

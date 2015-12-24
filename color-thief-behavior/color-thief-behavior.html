@@ -1,0 +1,143 @@
+<!--
+@license
+Copyright (c) 2015 Glenn Vandeuren. All rights reserved.
+-->
+<link rel="import" href="../polymer/polymer.html">
+<script src="../color-thief/dist/color-thief.min.js"></script>
+
+<script>
+  /**
+   * An Behavior wrapping color-thief
+   *
+   * @polymerBehavior ColorThiefBehavior
+   * @demo demo/index.html
+   */
+  ColorThiefBehavior = {
+
+    properties: {
+
+      image: String,
+
+      /**
+       * Array containig the dominant color
+       */
+      dominantColor: {
+        type: Array,
+        notify: true
+      },
+
+      /**
+       * Array containig a color palette
+       */
+      colorPalette: {
+        type: Array,
+        notify: true
+      },
+
+      /**
+       * The higher the quality the longer it takes to return the dominant color
+       */
+      quality: {
+        type: Number,
+        value: 10
+      },
+
+      /**
+       * the number of colors to return when performing the getColorPalette method
+       */
+      colorCount: {
+        type: Number,
+        value: 8
+      },
+
+      _colorThief: {
+        type: Object,
+        value: function() {
+          return new ColorThief();
+        }
+      }
+
+    },
+
+    observers: [
+      '_dominantColorChanged(dominantColor)',
+      '_colorPaletteChanged(colorPalette)'
+    ],
+
+    /**
+     * intercepts el.addEventListener so we can check when the listener is ready.
+     */
+    addEventListener: function(type, fn, capture) {
+      if (type === 'dominant-color-change' || type === 'color-palette-change') {
+        // intercept the function so we can check if the listener is ready
+        if (!capture) {
+          capture = false;
+        }
+        this._eventListener = EventTarget.prototype.addEventListener;
+        this._eventListener(type, fn, capture); // call method
+      } else {
+        console.log('error: did you define the correct type? ' + type);
+      }
+    },
+
+    /**
+     * The `dominant-color-change` event is fired when `_dominantColorChanged` is called.
+     *
+     * note: when not template-binding this event doesn't fire untill the listener is defined.
+     * @event dominant-color-change
+     * @detail [r, g, b]
+     */
+    _dominantColorChanged: function(color) {
+      var template  = template ? document.querySelector('template') : false;
+      // when dom-bind is not used, check if their is an event set and if it's ready
+      if (!this._eventListener && template.is !== 'dom-bind') {
+        this.async(function() {
+          return this._dominantColorChanged(color);
+        }, 100)
+      }
+      this.fire('dominant-color-change', color);
+    },
+
+    /**
+     * The `color-palette-change` event is fired when `_colorPaletteChanged` is called.
+     *
+     * note: when not template-binding this event doesn't fire untill the listener is defined.
+     * @event color-palette-change
+     * @detail [[r, g, b]]
+     */
+    _colorPaletteChanged: function(palette) {
+      var template  = template ? document.querySelector('template') : false;
+      // when dom-bind is not used, check if their is an event set and if it's ready
+      if (!this._eventListener && template.is !== 'dom-bind') {
+        this.async(function() {
+          return this._colorPaletteChanged(palette);
+        }, 100)
+      }
+      this.fire('color-palette-change', palette);
+    },
+
+
+    /**
+     * @param {object} img the `img` to get the color for
+     * @return {array} [r,g,b]
+     */
+    getColor: function(img, quality) {
+      quality = quality ? quality : this.quality;
+      this.dominantColor = this._colorThief.getColor(img);
+      return this.dominantColor;
+    },
+
+    /**
+     * colorPalette
+     *
+     * @param {object} img the `img` to get the color for
+     * @param {number} colorCount the number of colors to return
+     * @return {array} [[r,g,b], [r,g,b], ...]
+     */
+    getColorPalette: function(img, colorCount) {
+      colorCount = colorCount ? colorCount : this.colorCount;
+      this.colorPalette = this._colorThief.getPalette(img, colorCount);
+      return this.colorPalette;
+    }
+  };
+</script>

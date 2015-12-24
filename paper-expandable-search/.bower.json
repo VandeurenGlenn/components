@@ -41,6 +41,6 @@
     "commit": "a83e8f248c59951e99e57a23df2f07b83f648ac8"
   },
   "_source": "git://github.com/VandeurenGlenn/paper-expandable-search.git",
-  "_target": "~0.1.0-rc.2",
+  "_target": "~0.1.1",
   "_originalSource": "paper-expandable-search"
 }

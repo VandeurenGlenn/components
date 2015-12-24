@@ -1,0 +1,29 @@
+{
+  "name": "color-thief-image",
+  "version": "0.1.0_pre.1",
+  "authors": [
+    "Glenn Vandeuren <vandeurenglenn@gmail.com>"
+  ],
+  "description": "An element providing an image & it's dominant-color.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "seed"
+  ],
+  "main": "color-thief-image.html",
+  "license": "http://vandeurenglenn.github.io/LICENSE.txt",
+  "homepage": "https://github.com/vandeurenglenn/color-thief-image/",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.1.0",
+    "color-thief-behavior": "*"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  }
+}

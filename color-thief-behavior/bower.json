@@ -1,0 +1,29 @@
+{
+  "name": "color-thief-behavior",
+  "version": "0.1.0_pre.1",
+  "authors": [
+    "Glenn Vandeuren <vandeurenglenn@gmail.com>"
+  ],
+  "description": "An Behavior wrapping color-thief.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "seed"
+  ],
+  "main": "color-thief-behavior.html",
+  "license": "http://vandeurenglenn.github.io/LICENSE.txt",
+  "homepage": "https://github.com/vandeurenglenn/color-thief-behavior/",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.1.0",
+    "color-thief": "~2.0.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  }
+}

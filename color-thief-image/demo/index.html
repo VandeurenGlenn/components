@@ -1,0 +1,54 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 Glenn Vandeuren. All rights reserved.
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>color-thief-image Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../color-thief-image.html">
+  </head>
+  <style>
+    span {
+      display: flex;
+      margin: 0 auto;
+      width: 100px;
+      height: 100px;
+      flex-direction: row;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      border: 1px solid #EEE;
+    }
+    color-thief-image {
+      display: block;
+      margin: 0 auto;
+      width: 50%;
+    }
+  </style>
+  <body unresolved>
+
+    <color-thief-image
+      src="https://docs.google.com/drawings/d/1qi0a4eX0DRuG0sdxQU99RfEukO2dH91JMjqXDvuAxH8/pub?w=192&h=192">
+    </color-thief-image>
+
+    <span></span>
+
+    <script>
+      var seedElement = document.querySelector('color-thief-image');
+      seedElement.addEventListener('dominant-color-change', function(e) {
+        var color = e.detail;
+        var span = document.querySelector('span');
+        span.style.background = 'rgb(' + color.concat() + ')';
+        span.innerText = 'rgb(' + color.concat() + ')';
+      })
+    </script>
+
+  </body>
+</html>
