@@ -19,9 +19,13 @@
     "polymer": "Polymer/Polymer#~1.2.3",
     "paper-expandable-search": "~0.1.1",
     "color-thief-behavior": "*",
-    "color-thief-image": "*"
+    "color-thief-image": "*",
+    "paper-list-item": "~0.1.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~1.1.2"
+  },
+  "resolutions": {
+    "web-animations-js": "2.1.3"
   }
 }
